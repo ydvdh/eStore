@@ -1,5 +1,5 @@
 import { ShoppingCart } from "@mui/icons-material";
-import { AppBar, Badge, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
+import { AppBar, Badge, IconButton, List, ListItem, Switch, Toolbar, Typography, Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 interface Props{
@@ -16,44 +16,61 @@ const rightLinks = [
     {title: 'login', path:'/login'},
     {title: 'register', path:'/register'}
 ]
+const navStyle = {
+    color: 'inherit',
+    textDecoration:'none',
+    typography:'h6',
+    '&:hover':{
+        color: 'secondary.main'
+    },
+    '&.active':{
+        color: 'text.secondary'
+    }
+}
 
 function Header({darkMode, handelThemeChange} : Props) {
     return (
        <AppBar position="static" sx={{mb: 4}}>
-           <Toolbar>
-               <Typography variant="h6" component={NavLink} to='/' sx={{color:'inherit', textDecoration:'none'}}>
-                    E-Store
-               </Typography>
-               <Switch checked={darkMode} onChange={handelThemeChange} />
+           <Toolbar sx={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+               <Box display='flex' alignItems='center'>
+                    <Typography variant="h6" exact component={NavLink} to='/' sx={navStyle}>
+                            E-Store
+                    </Typography>
+                    <Switch checked={darkMode} onChange={handelThemeChange} />                  
+               </Box>
+
                <List sx={{display:'flex'}}>
-                   {midLinks.map(({title, path})=> (
-                       <ListItem
-                            component={NavLink}
-                            to={path}
-                            key={path}
-                            sx={{color: 'inherit', typography:'h6'}}
-                            >
-                           {title.toLocaleUpperCase()}
-                       </ListItem>
-                   ))}
-               </List>
-               <IconButton sx={{color:'inherit'}} size="large">
-                   <Badge badgeContent={4} color='secondary'>
-                       <ShoppingCart  />
-                   </Badge>
-               </IconButton>
-               <List sx={{display:'flex'}}>
-                   {rightLinks.map(({title, path})=> (
-                       <ListItem
-                            component={NavLink}
-                            to={path}
-                            key={path}
-                            sx={{color: 'inherit', typography:'h6'}}
-                            >
-                           {title.toLocaleUpperCase()}
-                       </ListItem>
-                   ))}
-               </List>
+                        {midLinks.map(({title, path})=> (
+                            <ListItem
+                                    component={NavLink}
+                                    to={path}
+                                    key={path}
+                                    sx={navStyle}
+                                    >
+                                {title.toLocaleUpperCase()}
+                            </ListItem>
+                        ))}
+                </List>
+               
+               <Box display='flex' alignItems='center'>
+                    <IconButton sx={{color:'inherit'}} size="large">
+                        <Badge badgeContent={4} color='secondary'>
+                            <ShoppingCart  />
+                        </Badge>
+                    </IconButton>
+                    <List sx={{display:'flex'}}>
+                        {rightLinks.map(({title, path})=> (
+                            <ListItem
+                                    component={NavLink}
+                                    to={path}
+                                    key={path}
+                                    sx={navStyle}
+                                    >
+                                {title.toLocaleUpperCase()}
+                            </ListItem>
+                        ))}
+                    </List>
+               </Box>
            </Toolbar>
        </AppBar>
     );
