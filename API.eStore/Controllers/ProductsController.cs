@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace API.eStore.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController : ApiBaseController
     {
         private readonly StoreContext _storeContext;
 
