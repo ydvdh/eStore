@@ -1,12 +1,17 @@
 import Header from '../layout/Header'
 import { Container, CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import { useState } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import  Home  from '../../features/home/Home';
 import Catalog from '../../features/catalog/Catalog';
 import  About  from '../../features/about/About';
 import  Contact  from '../../features/contact/Contact';
 import ProductDetails from '../../features/catalog/ProductDetails';
+import Buggy from '../../features/buggy/Buggy';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+import  ServerError  from '../errors/ServerError';
+import  NotFound  from '../errors/NotFound';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -26,14 +31,20 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <ToastContainer position='bottom-right' hideProgressBar />
       <CssBaseline />
       <Header darkMode={darkMode} handelThemeChange={handelThemeChange} />
       <Container>
+       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/catalog' component={Catalog} />
         <Route path='/catalog/:id' component={ProductDetails} />
         <Route path='/about' component={About} />
         <Route path='/contact' component={Contact} />
+        <Route path='/buggy' component={Buggy} />
+        <Route path='/server-error' component={ServerError} />
+        <Route component={NotFound} />
+       </Switch>
       </Container>
     </ThemeProvider>
   );
