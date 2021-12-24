@@ -1,6 +1,6 @@
 import { ShoppingCart } from "@mui/icons-material";
 import { AppBar, Badge, IconButton, List, ListItem, Switch, Toolbar, Typography, Box } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 interface Props{
     darkMode: boolean;
@@ -53,7 +53,7 @@ function Header({darkMode, handelThemeChange} : Props) {
                 </List>
                
                <Box display='flex' alignItems='center'>
-                    <IconButton sx={{color:'inherit'}} size="large">
+                    <IconButton component={Link} to="/basket" sx={{color:'inherit'}} size="large">
                         <Badge badgeContent={4} color='secondary'>
                             <ShoppingCart  />
                         </Badge>
