@@ -43,7 +43,7 @@ namespace API.eStore
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+                    policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().AllowAnyHeader().SetIsOriginAllowed(host => true).WithOrigins("http://localhost:3000");
                 });
             });
         }
